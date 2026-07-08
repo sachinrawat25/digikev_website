@@ -621,6 +621,98 @@ body::after{content:"";position:fixed;inset:0;z-index:9999;pointer-events:none;o
   *,*::before,*::after{animation-duration:.001s!important;animation-iteration-count:1!important;transition-duration:.001s!important}
   .marquee-track{animation:none;transform:none}
 }
+
+/* ============ HERO ECOSYSTEM (app-icon showcase) ============ */
+.eco{position:absolute;inset:0;will-change:transform}
+.eco-ring{
+  position:absolute;left:50%;top:50%;border-radius:50%;pointer-events:none;
+  border:1px solid rgba(61,123,255,.13);will-change:transform,opacity;
+}
+[data-theme="light"] .eco-ring{border-color:rgba(21,83,240,.15)}
+.eco-dim{
+  position:absolute;inset:-6%;pointer-events:none;opacity:0;z-index:45;
+  /* soft focus halo: darkness rises mid-radius then fades out again,
+     so the overlay has no visible rectangular edge on the starfield */
+  background:radial-gradient(50% 46% at 50% 50%, transparent 40%, rgba(3,3,10,.32) 64%, rgba(3,3,10,0) 86%);
+  will-change:opacity;
+}
+[data-theme="light"] .eco-dim{background:radial-gradient(50% 46% at 50% 50%, transparent 40%, rgba(10,23,48,.10) 64%, rgba(10,23,48,0) 86%)}
+.eco-spot{
+  position:absolute;left:50%;top:50%;width:390px;height:390px;translate:-50% -50%;
+  border-radius:50%;pointer-events:none;opacity:0;z-index:48;
+  background:radial-gradient(circle, rgba(120,166,255,.20), rgba(61,123,255,.06) 46%, transparent 70%);
+  will-change:opacity;
+}
+[data-theme="light"] .eco-spot{background:radial-gradient(circle, rgba(21,83,240,.13), rgba(21,83,240,.04) 46%, transparent 70%)}
+.eco-core{
+  position:absolute;left:50%;top:50%;z-index:30;width:min(200px,24vmin);aspect-ratio:1;
+  translate:-50% -50%;will-change:transform,opacity;
+}
+.eco-core-glow{
+  position:absolute;inset:-30%;border-radius:50%;pointer-events:none;
+  background:radial-gradient(circle, rgba(61,123,255,.15), rgba(61,123,255,.05) 48%, transparent 68%);
+}
+.eco-core-disc{
+  position:absolute;inset:0;border-radius:24%;display:grid;place-items:center;
+  background:
+    radial-gradient(115% 115% at 30% 22%, rgba(61,123,255,.10), transparent 50%),
+    radial-gradient(circle at 50% 50%, #0D1526, #060A14 70%);
+  box-shadow:
+    0 34px 80px rgba(0,0,0,.55),
+    0 0 0 1px rgba(234,240,250,.07),
+    0 0 54px rgba(61,123,255,.10),
+    inset 0 1.5px 0 rgba(255,255,255,.1),
+    inset 0 -12px 26px rgba(0,0,0,.3);
+  will-change:transform;
+}
+.eco-core-disc::before{
+  content:"";position:absolute;inset:0;border-radius:inherit;pointer-events:none;
+  background:linear-gradient(178deg, rgba(255,255,255,.10), rgba(255,255,255,.02) 34%, transparent 52%);
+}
+.eco-core-disc img{
+  width:56%;height:56%;object-fit:contain;display:block;
+  filter:invert(1) brightness(1.2);mix-blend-mode:screen;opacity:.92;
+}
+.eco-app{
+  position:absolute;left:50%;top:50%;z-index:40;cursor:pointer;
+  width:var(--tw,86px);aspect-ratio:1;border-radius:26%;
+  background:radial-gradient(130% 130% at 30% 16%, var(--c1), var(--c2) 62%, #05050E 130%);
+  box-shadow:
+    0 18px 42px rgba(0,0,0,.5),
+    0 0 0 1px rgba(255,255,255,.07),
+    0 0 calc(9px + var(--boost,0)*34px) color-mix(in oklab, var(--acc) calc(8% + var(--boost,0)*42%), transparent),
+    inset 0 1.5px 0 rgba(255,255,255,.22),
+    inset 0 -9px 20px rgba(0,0,0,.32);
+  will-change:transform,opacity;backface-visibility:hidden;
+  transition:filter .8s var(--ease);
+}
+.eco-app::before{
+  content:"";position:absolute;inset:0;border-radius:inherit;pointer-events:none;
+  background:linear-gradient(178deg, rgba(255,255,255,.20), rgba(255,255,255,.04) 34%, transparent 52%);
+}
+.eco-app::after{
+  content:"";position:absolute;inset:0;border-radius:inherit;pointer-events:none;
+  box-shadow:inset 0 -1px 0 color-mix(in oklab, var(--acc) 34%, transparent);opacity:.7;
+}
+.eco-app svg{
+  position:absolute;inset:0;margin:auto;width:46%;height:46%;
+  stroke:#fff;stroke-width:1.7;fill:none;stroke-linecap:round;stroke-linejoin:round;
+  filter:drop-shadow(0 2.5px 3px rgba(0,0,0,.55)) drop-shadow(0 -0.5px 0 rgba(255,255,255,.28));
+  opacity:.96;
+}
+.eco-app.is-back{filter:brightness(.72) saturate(.85)}
+.eco-plate{
+  position:absolute;left:50%;top:50%;z-index:110;pointer-events:none;opacity:0;
+  translate:-50% 0;text-align:center;white-space:nowrap;will-change:transform,opacity;
+}
+.eco-plate b{font-family:var(--font-display);font-weight:700;font-size:clamp(15px,1.3vw,19px);letter-spacing:-.01em;display:block}
+.eco-plate span{display:block;margin-top:4px;font-family:var(--font-mono);font-size:8.5px;letter-spacing:.22em;color:var(--blue2)}
+@media (max-width:640px){
+  .eco-app{--tw:62px}
+  .eco-core{width:140px}
+  .eco-plate b{font-size:14px}
+  .eco-plate span{font-size:7.5px}
+}
 </style>
 </head>
 <body>
@@ -639,9 +731,6 @@ body::after{content:"";position:fixed;inset:0;z-index:9999;pointer-events:none;o
       </a>
       <nav aria-label="Primary">
         <ul class="nav-links">
-          <li><a href="#products">Products</a></li>
-          <li><a href="#sports">Sports</a></li>
-          <li><a href="#booking">Booking</a></li>
           <li><a href="#pricing">Pricing</a></li>
           <li><a href="#faq">FAQ</a></li>
         </ul>
@@ -687,48 +776,14 @@ body::after{content:"";position:fixed;inset:0;z-index:9999;pointer-events:none;o
     </div>
 
     <div class="hero-stage" id="heroStage">
-      <div class="hero-multi" id="heroMulti">
-        <div class="phone ph" data-slot="1" role="img" aria-label="Trainee app: next session">
-          <div class="screen">
-            <div class="glare" id="heroGlare"></div>
-            <div class="scr-hd"><div><small>NEXT SESSION</small><h4>Tomorrow, 7:00</h4></div><div class="scr-avatar">MR</div></div>
-            <div class="up-card">
-              <span class="up-tag">TENNIS · ADVANCED</span>
-              <h5>Session with<br>Coach Daniel.</h5>
-              <p>Court 3 · Wimbledon · 90 min</p>
-              <span class="up-btn">Book session · £42</span>
-            </div>
-            <div class="scr-stats"><div class="scr-stat"><b>12</b><span>Sessions</span></div><div class="scr-stat"><b>4<i>w</i></b><span>Streak</span></div></div>
-            <div class="scr-nav"><span class="on"><i></i>Home</span><span><i></i>Book</span><span><i></i>Feed</span><span><i></i>Pay</span><span><i></i>You</span></div>
-          </div>
+      <div class="eco" id="heroEco" aria-hidden="true">
+        <div class="eco-core" id="ecoCore">
+          <div class="eco-core-glow" id="ecoCoreGlow"></div>
+          <div class="eco-core-disc"><img id="ecoLogo" alt=""></div>
         </div>
-        <div class="phone ph" data-slot="0" role="img" aria-label="Coach app: attendance">
-          <div class="screen">
-            <div class="scr-hd"><div><small>TODAY, 5:00 PM</small><h4>Attendance</h4></div><div class="scr-avatar">CD</div></div>
-            <div class="up-row" style="margin-top:8px"><div class="up-date"><b>✓</b></div><div class="up-info"><b>Maya R.</b><span>U14 squad</span></div><span class="up-when">Here</span></div>
-            <div class="up-row"><div class="up-date"><b>✓</b></div><div class="up-info"><b>Jordan K.</b><span>U14 squad</span></div><span class="up-when">Here</span></div>
-            <div class="up-row"><div class="up-date"><b>·</b></div><div class="up-info"><b>Sara M.</b><span>U14 squad</span></div><span class="up-when">Away</span></div>
-            <div class="scr-stats"><div class="scr-stat"><b>11/12</b><span>Present</span></div></div>
-            <div class="scr-nav"><span><i></i>Home</span><span class="on"><i></i>Book</span><span><i></i>Feed</span><span><i></i>Pay</span><span><i></i>You</span></div>
-          </div>
-        </div>
-        <div class="phone ph" data-slot="2" role="img" aria-label="Admin app: revenue overview">
-          <div class="screen">
-            <div class="scr-hd"><div><small>THIS MONTH</small><h4>Overview</h4></div><div class="scr-avatar">AK</div></div>
-            <div class="scr-stats" style="margin-top:10px"><div class="scr-stat"><b>£38<i>k</i></b><span>Revenue</span></div><div class="scr-stat"><b>84<i>%</i></b><span>Filled</span></div></div>
-            <div class="up-row" style="margin-top:8px"><div class="up-date"><b>£</b></div><div class="up-info"><b>Payout sent</b><span>9 coaches · £1,240</span></div></div>
-            <div class="up-row"><div class="up-date"><b>+</b></div><div class="up-info"><b>91 new members</b><span>This month</span></div></div>
-            <div class="scr-nav"><span class="on"><i></i>Home</span><span><i></i>Book</span><span><i></i>Feed</span><span><i></i>Pay</span><span><i></i>You</span></div>
-          </div>
-        </div>
-      </div>
-      <div class="float-card fc-booking" aria-hidden="true">
-        <div class="fc-top"><span class="fc-ic volt"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M20 6 9 17l-5-5"/></svg></span><div><b>Booking confirmed</b><small>Court 3 · Tomorrow 7:00</small></div></div>
-      </div>
-      <div class="float-card fc-session" aria-hidden="true">
-        <div class="fc-top"><span class="fc-ic blue"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 17l6-6 4 4 8-8"/></svg></span><div><b>Attendance</b><small>This week</small></div></div>
-        <div class="fc-bar"><i></i></div>
-        <div class="fc-row"><span>34 of 40 trainees</span><span>85%</span></div>
+        <div class="eco-spot" id="ecoSpot"></div>
+        <div class="eco-dim" id="ecoDim"></div>
+        <div class="eco-plate" id="ecoPlate"><b id="ecoPlateName"></b><span>OFFICIAL CLUB APP · POWERED BY ACTIKEV</span></div>
       </div>
     </div>
   </div>
@@ -1197,6 +1252,77 @@ const title = document.getElementById("heroTitle");
   walk(title);
 })();
 
+/* ---------- HERO ECOSYSTEM: build branded club app tiles ---------- */
+const ECO_MARKS = {
+  football : '<circle cx="12" cy="12" r="8.6"/><path d="M12 8.4l3.5 2.5-1.3 4.1h-4.4l-1.3-4.1z"/><path d="M12 3.4v5M20.2 9.6l-4.7 1.3M18.7 18.9l-2.5-3.9M5.3 18.9l2.5-3.9M3.8 9.6l4.7 1.3"/>',
+  basket   : '<circle cx="12" cy="12" r="8.6"/><path d="M12 3.4v17.2M3.4 12h17.2M6.1 6.1c3 2.7 3 9.1 0 11.8M17.9 6.1c-3 2.7-3 9.1 0 11.8"/>',
+  tennis   : '<ellipse cx="10.2" cy="9.2" rx="5.6" ry="6.4"/><path d="M14.2 14.4 19.6 20"/><path d="M7.2 6.6c1.9 2.3 4.1 3.3 5.9 4.5"/><circle cx="18.6" cy="6.4" r="1.7"/>',
+  swim     : '<path d="M2.5 15c2-2 4-2 6 0s4 2 6 0 4-2 6 0"/><path d="M2.5 19c2-2 4-2 6 0s4 2 6 0 4-2 6 0"/><path d="M14.5 11a4 4 0 1 0-6-3.5"/>',
+  cricket  : '<path d="m5.5 17.5 8.6-12.4 3.8 2.9-8.6 12.4z"/><circle cx="18" cy="17.6" r="2.3"/>',
+  hockey   : '<path d="M5.5 3.5c0 5.6 1.9 9.9 5.2 12.8l1.3.9M18.5 3.5c0 5.6-1.9 9.9-5.2 12.8l-1.3.9"/><circle cx="12" cy="20" r="1.6"/>',
+  volley   : '<circle cx="12" cy="12" r="8.6"/><path d="M12 12c-3.3-2.3-4.9-5.8-4.3-8.2M12 12c4.1-.4 7.2 1.3 8.2 3.5M12 12c-.8 3.9-3.3 6.4-6 6.9"/>',
+  martial  : '<rect x="3" y="10.4" width="18" height="3.2" rx="1.2"/><rect x="9.7" y="9.4" width="4.6" height="5.2" rx="1.2"/><path d="M10.6 14.6 8.2 20.4M13.4 14.6l2.4 5.8"/>',
+  rugby    : '<ellipse cx="12" cy="12" rx="8.8" ry="5.5" transform="rotate(-30 12 12)"/><path d="M8.7 14.4c2.1-2.1 4.5-3.8 6.6-4.9"/><path d="M10.3 12.2l1.1 1.2M12.3 10.9l1.1 1.2"/>',
+  athletic : '<circle cx="12" cy="13.4" r="7.4"/><path d="M10 2.6h4M12 2.6v3.4M12 13.4V9.2M12 13.4l2.8 2"/>'
+};
+const ECO_CLUBS = [
+  { name:"London Football Club",  mark:ECO_MARKS.football, c1:"#1E7A46", c2:"#0A2818", acc:"#4ADE80" },
+  { name:"Birmingham Basketball", mark:ECO_MARKS.basket,   c1:"#B45A2B", c2:"#38190B", acc:"#FB923C" },
+  { name:"Elite Tennis Club",     mark:ECO_MARKS.tennis,   c1:"#6D5BD0", c2:"#221A4B", acc:"#A78BFA" },
+  { name:"Swim Academy",          mark:ECO_MARKS.swim,     c1:"#1F6E9C", c2:"#0A2438", acc:"#38BDF8" },
+  { name:"Warriors Cricket Club", mark:ECO_MARKS.cricket,  c1:"#A87F2A", c2:"#32240C", acc:"#FBBF24" },
+  { name:"Hockey Academy",        mark:ECO_MARKS.hockey,   c1:"#16808F", c2:"#062B31", acc:"#22D3EE" },
+  { name:"Volleyball Club",       mark:ECO_MARKS.volley,   c1:"#4A55B8", c2:"#161B45", acc:"#818CF8" },
+  { name:"Martial Arts Academy",  mark:ECO_MARKS.martial,  c1:"#8F7A2E", c2:"#2C250D", acc:"#E5C453" },
+  { name:"Rugby Academy",         mark:ECO_MARKS.rugby,    c1:"#17796C", c2:"#062824", acc:"#2DD4BF" },
+  { name:"Athletics Club",        mark:ECO_MARKS.athletic, c1:"#B04A3A", c2:"#36120E", acc:"#F87171" }
+];
+const ecoEl = document.getElementById("heroEco");
+let ecoApps = [], ECO_RX = 0, ECO_RY = 0;
+function ecoSlot(i){
+  const th = -Math.PI / 2 + i * (Math.PI * 2 / ECO_CLUBS.length);
+  return { x: Math.cos(th) * ECO_RX, y: Math.sin(th) * ECO_RY };
+}
+if (ecoEl) {
+  // the core reuses the brand mark already embedded in the nav logo
+  const navLogo = document.querySelector(".logo-mark img");
+  const ecoLogo = document.getElementById("ecoLogo");
+  if (navLogo && ecoLogo) ecoLogo.src = navLogo.src;
+
+  const ecoRing = document.createElement("div");
+  ecoRing.className = "eco-ring";
+  ecoEl.insertBefore(ecoRing, document.getElementById("ecoCore"));
+
+  ecoApps = ECO_CLUBS.map(c => {
+    const el = document.createElement("div");
+    el.className = "eco-app";
+    el.style.setProperty("--c1", c.c1);
+    el.style.setProperty("--c2", c.c2);
+    el.style.setProperty("--acc", c.acc);
+    el.innerHTML = '<svg viewBox="0 0 24 24" aria-hidden="true">' + c.mark + '</svg>';
+    ecoEl.insertBefore(el, document.getElementById("ecoSpot"));
+    return el;
+  });
+
+  const ecoStage = document.getElementById("heroStage");
+  function ecoLayout(){
+    const r = ecoStage.getBoundingClientRect();
+    const base = Math.min(r.width, r.height) / 2;
+    ECO_RX = Math.min(r.width * .46, base * 1.1);
+    ECO_RY = base * .8;
+    ecoRing.style.width  = (ECO_RX * 2) + "px";
+    ecoRing.style.height = (ECO_RY * 2) + "px";
+    ecoRing.style.margin = (-ECO_RY) + "px 0 0 " + (-ECO_RX) + "px";
+  }
+  ecoLayout(); addEventListener("resize", ecoLayout);
+
+  // static placement: correct first paint, and the no-motion fallback
+  ecoApps.forEach((el, i) => {
+    const p = ecoSlot(i);
+    el.style.transform = "translate(-50%,-50%) translate(" + p.x.toFixed(1) + "px," + p.y.toFixed(1) + "px)";
+  });
+}
+
 /* ---------- GSAP ---------- */
 if (hasGSAP && !reduceMotion) {
   gsap.registerPlugin(ScrollTrigger);
@@ -1208,15 +1334,9 @@ if (hasGSAP && !reduceMotion) {
        .from(".hero .lede", { y: 24, autoAlpha: 0, duration: .9 }, 0.65)
        .from(".hero-ctas .btn", { y: 20, autoAlpha: 0, duration: .8, stagger: .1 }, 0.8)
        .from(".hero-meta div", { y: 20, autoAlpha: 0, duration: .8, stagger: .1 }, 0.95)
-       .from("#heroMulti", { y: 70, autoAlpha: 0, duration: 1.4, ease: "power3.out" }, 0.4)
-       .from(".float-card", { y: 34, autoAlpha: 0, scale: .94, duration: 1, stagger: .18 }, 0.9)
+       .from("#heroEco", { y: 60, autoAlpha: 0, duration: 1.4, ease: "power3.out" }, 0.4)
        .from(".scroll-hint", { autoAlpha: 0, duration: .8 }, 1.4);
 
-  // Idle float on hero elements
-  gsap.to("#heroMulti", { y: -12, duration: 3.6, yoyo: true, repeat: -1, ease: "sine.inOut", delay: 2 });
-  // Cards bob on y (idle) while the mouse parallax owns x, so no shared axis and no fighting.
-  gsap.to(".fc-booking", { y: -12, duration: 2.9, yoyo: true, repeat: -1, ease: "sine.inOut", delay: 2.2 });
-  gsap.to(".fc-session", { y: 12, duration: 3.4, yoyo: true, repeat: -1, ease: "sine.inOut", delay: 2.5 });
 
   // Live ticker in the hero badge
   (function ticker(){
@@ -1238,54 +1358,136 @@ if (hasGSAP && !reduceMotion) {
     }, 3600);
   })();
 
-  /* ===== HERO CAROUSEL: three connected apps rotate through the front slot.
-     Slots: 0 = front-center, 1 = back-left, 2 = back-right. Every 3.8s each
-     phone advances one slot with overlapping GSAP motion. Mouse parallax
-     tilts the whole group. Paused off-screen. */
-  (function heroCarousel(){
-    const stage = document.getElementById("heroMulti");
-    if (!stage) return;
-    const phones = [...stage.querySelectorAll(".ph")];
-    const slots = [
-      { x: 0,    y: 0,  scale: 1,   rotY: 0,   op: 1,   z: 4, blur: 0 },
-      { x: -150, y: 14, scale: .78, rotY: 16,  op: .55, z: 2, blur: 1.5 },
-      { x: 150,  y: 14, scale: .78, rotY: -16, op: .55, z: 3, blur: 1.5 }
-    ];
-    function apply(ph, sl, dur){
-      gsap.to(ph, {
-        xPercent: -50, yPercent: -50,
-        x: sl.x, y: sl.y, scale: sl.scale, rotationY: sl.rotY,
-        autoAlpha: sl.op, zIndex: sl.z,
-        filter: "blur(" + sl.blur + "px)",
-        duration: dur, ease: "power3.inOut", overwrite: "auto"
-      });
-    }
-    phones.forEach(ph => {
-      const i = +ph.dataset.slot;
-      gsap.set(ph, { xPercent: -50, yPercent: -50, transformPerspective: 1100 });
-      apply(ph, slots[i], 0);
+  /* ===== APP SHOWCASE: every branded club app gets its moment.
+     The active app travels to center-front over the ActiKev core,
+     scales up under a spotlight; the rest recede. Click any app to
+     bring it forward; hovering holds the current moment. ===== */
+  (function ecoShowcase(){
+    if (!ecoEl || !ecoApps.length) return;
+    const spotEl  = document.getElementById("ecoSpot");
+    const dimEl   = document.getElementById("ecoDim");
+    const plateEl = document.getElementById("ecoPlate");
+    const plateNm = document.getElementById("ecoPlateName");
+    const coreEl  = document.getElementById("ecoCore");
+
+    const stEco = ecoApps.map((el, i) => {
+      const p = ecoSlot(i);
+      return { el, i, bx: p.x, by: p.y, bs: 1, boost: 0,
+               bob: Math.random() * Math.PI * 2, active: false, back: false };
     });
-    let running = true;
-    function advance(){
-      if (!running || reduceMotion) return;
-      phones.forEach(ph => {
-        ph.dataset.slot = (+ph.dataset.slot + 1) % 3;
-        apply(ph, slots[+ph.dataset.slot], 1.1);
-      });
+    const ecoMouse = { x: 0, y: 0 };
+    let ecoDimmed = false, ecoOnScreen = true;
+
+    function ecoTick(time){
+      const t = time * 1000;
+      for (const o of stEco){
+        const f = o.boost;
+        const fx = Math.sin(t / 1400 + o.bob) * 4 * (1 - f);
+        const fy = Math.cos(t / 1150 + o.bob) * 5 * (1 - f);
+        const rot = Math.sin(t / 1900 + o.bob) * 1.6 * (1 - f);
+        const br = 1 + Math.sin(t / 2300 + o.bob) * .012;
+        gsap.set(o.el, {
+          xPercent: -50, yPercent: -50,
+          x: o.bx + fx + ecoMouse.x * 10,
+          y: o.by + fy + ecoMouse.y * 8,
+          scale: o.bs * br, rotation: rot,
+          zIndex: o.active ? 100 : 40
+        });
+        o.el.style.setProperty("--boost", f.toFixed(3));
+        const back = !o.active && ecoDimmed;
+        if (back !== o.back){ o.el.classList.toggle("is-back", back); o.back = back; }
+      }
     }
-    const iv = setInterval(advance, 3800);
-    new IntersectionObserver(([e]) => running = e.isIntersecting).observe(stage);
-    // group mouse parallax
-    if (window.matchMedia("(pointer:fine)").matches && !reduceMotion) {
-      const rx = gsap.quickTo(stage, "rotationX", { duration: .8, ease: "power3.out" });
-      const ry = gsap.quickTo(stage, "rotationY", { duration: .8, ease: "power3.out" });
-      gsap.set(stage, { transformPerspective: 1400, transformOrigin: "50% 50%" });
+
+    /* gentle parallax on the whole ecosystem */
+    if (window.matchMedia("(pointer:fine)").matches) {
+      const rx = gsap.quickTo(ecoEl, "rotationX", { duration: 1.1, ease: "power3.out" });
+      const ry = gsap.quickTo(ecoEl, "rotationY", { duration: 1.1, ease: "power3.out" });
+      gsap.set(ecoEl, { transformPerspective: 1500, transformOrigin: "50% 50%" });
       document.querySelector(".hero").addEventListener("mousemove", e => {
-        const r = stage.getBoundingClientRect();
-        ry(((e.clientX - r.left) / r.width - .5) * 7);
-        rx(-((e.clientY - r.top) / r.height - .5) * 5);
+        const r = document.getElementById("heroStage").getBoundingClientRect();
+        ecoMouse.x = (e.clientX - r.left) / r.width - .5;
+        ecoMouse.y = (e.clientY - r.top) / r.height - .5;
+        ry(ecoMouse.x * 3.5); rx(-ecoMouse.y * 2.5);
       }, { passive: true });
     }
+
+    const PRESENT = window.matchMedia("(max-width:640px)").matches ? 1.5 : 1.35;
+    const HOLD = 2.1, DUR_IN = 1.0, DUR_OUT = .85, GAP = .3;
+    let cur = -1, cycleCall = null, holdCycle = false;
+
+    function present(i){
+      const o = stEco[i];
+      o.active = true;
+      plateNm.textContent = ECO_CLUBS[i].name;
+      gsap.to(o, { bx: 0, by: 0, bs: PRESENT, boost: 1, duration: DUR_IN, ease: "power3.inOut" });
+      gsap.fromTo(o.el, { rotationY: -14 }, { rotationY: 0, duration: DUR_IN * 1.1, ease: "power3.out" });
+      gsap.to([spotEl, dimEl], { autoAlpha: 1, duration: DUR_IN, ease: "power2.out" });
+      gsap.to(coreEl, { opacity: .6, duration: DUR_IN, ease: "power2.out" });
+      gsap.fromTo(plateEl, { autoAlpha: 0, y: 96 },
+                           { autoAlpha: 1, y: 82, duration: .7, ease: "power3.out", delay: DUR_IN * .55 });
+      ecoDimmed = true;
+    }
+    function retire(i){
+      const o = stEco[i];
+      const p = ecoSlot(i);
+      gsap.to(o, { bx: p.x, by: p.y, bs: 1, boost: 0, duration: DUR_OUT, ease: "power3.inOut",
+                   onComplete(){ o.active = false; } });
+      gsap.to(plateEl, { autoAlpha: 0, y: 90, duration: .35, ease: "power2.in" });
+    }
+    function cycle(){
+      if (holdCycle || !ecoOnScreen){ cycleCall = gsap.delayedCall(.8, cycle); return; }
+      if (cur >= 0) retire(cur);
+      cur = (cur + 1) % stEco.length;
+      gsap.delayedCall(GAP, () => present(cur));
+      cycleCall = gsap.delayedCall(DUR_IN + HOLD, cycle);
+    }
+
+    ecoApps.forEach((el, i) => {
+      el.addEventListener("click", () => {
+        if (i === cur) return;
+        if (cycleCall) cycleCall.kill();
+        if (cur >= 0) retire(cur);
+        cur = i;
+        present(i);
+        cycleCall = gsap.delayedCall(DUR_IN + HOLD, cycle);
+      });
+      el.addEventListener("mouseenter", () => { holdCycle = true; });
+      el.addEventListener("mouseleave", () => { holdCycle = false; });
+    });
+    new IntersectionObserver(([e]) => ecoOnScreen = e.isIntersecting)
+      .observe(document.getElementById("heroStage"));
+
+    /* entrance: tiles assemble from the edges, then the show begins */
+    const sR = document.getElementById("heroStage").getBoundingClientRect();
+    function ecoEntry(i){
+      const dirs = [
+        { x: 0, y: -sR.height * .7 }, { x: sR.width * .65, y: -sR.height * .45 },
+        { x: sR.width * .7, y: 0 },   { x: sR.width * .65, y: sR.height * .45 },
+        { x: 0, y: sR.height * .7 },  { x: -sR.width * .65, y: sR.height * .45 },
+        { x: -sR.width * .7, y: 0 },  { x: -sR.width * .65, y: -sR.height * .45 }
+      ];
+      return dirs[(i * 3 + 1) % dirs.length];
+    }
+    const ecoTl = gsap.timeline({ delay: .7 });
+    ecoTl.fromTo(".eco-ring", { autoAlpha: 0, scale: .86 },
+                              { autoAlpha: 1, scale: 1, duration: 1.5, ease: "expo.out" }, 0);
+    ecoApps.forEach((el, i) => {
+      const from = ecoEntry(i);
+      const p = ecoSlot(i);
+      ecoTl.fromTo(el,
+        { xPercent: -50, yPercent: -50, x: from.x, y: from.y, scale: .6, autoAlpha: 0,
+          rotation: gsap.utils.random(-14, 14) },
+        { x: p.x, y: p.y, scale: 1, autoAlpha: 1, rotation: 0, duration: 1.15,
+          ease: "power4.out", immediateRender: true },
+        .2 + i * .28 + Math.random() * .08);
+    });
+    ecoTl.add(() => {
+      gsap.ticker.add(ecoTick);
+      gsap.to(".eco-core-disc", { scale: 1.018, duration: 3.4, yoyo: true, repeat: -1, ease: "sine.inOut" });
+      gsap.to("#ecoCoreGlow", { opacity: .55, duration: 4, yoyo: true, repeat: -1, ease: "sine.inOut" });
+    });
+    ecoTl.add(() => { cycle(); }, "+=.6");
   })();
 
   /* ===== ADMIN DASHBOARD: Apple-style zoom-in as it enters the viewport ===== */
