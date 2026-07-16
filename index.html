@@ -786,11 +786,13 @@ body::after{content:"";position:fixed;inset:0;z-index:9999;pointer-events:none;o
 /* ===== ported booking flow (scoped, isolated) ===== */
 /* app colour tokens (hardcoded light so the phone screen reads on BOTH light & dark themes);
    caption text (--ink/--ink-2) stays theme-adaptive via the page vars */
+/* booking phone: DARK theme + softly obscured (ambient backdrop; bullets carry the detail) */
 .bkf-root{display:flex;flex-direction:column;align-items:center;color:var(--ink);
-  --app-bg:#F1F2F5;--app-card:#FFFFFF;--app-ink:#16181D;--app-ink-2:#6B7280;--app-ink-3:#9AA0AA;
-  --app-line:#E7E9ED;--app-chip:#EEF0F3;--app-blue:#2E7DFF;--app-blue-2:#4C93FF;--app-dark:#17181C;
-  --app-gold:#F5B301;--app-green:#22B36B;--ease:cubic-bezier(.22,1,.36,1);--ink-2:var(--ink2)}
+  --app-bg:#0E1522;--app-card:#171F2D;--app-ink:#E7EDF6;--app-ink-2:#94A0B2;--app-ink-3:#69748A;
+  --app-line:#26303F;--app-chip:#1E2735;--app-blue:#2E7DFF;--app-blue-2:#4C93FF;--app-dark:#2A3444;
+  --app-gold:#F5C451;--app-green:#2ED47F;--ease:cubic-bezier(.22,1,.36,1);--ink-2:var(--ink2)}
 .bkf-root *,.bkf-root *::before,.bkf-root *::after{box-sizing:border-box}
+.bkf-root .screen{filter:blur(1.3px) saturate(.92) brightness(.96)}   /* only high-level details read through */
 /* neutralise the page's base .phone/.screen rules that bleed onto the ported phone; zoom = smaller phone */
 .bkf-root .phone{position:relative!important;left:auto!important;top:auto!important;translate:none!important;transform:none!important;transform-style:flat!important;zoom:.8}
 .bkf-root .screen::after{content:none!important;display:none!important;animation:none!important}
@@ -1344,8 +1346,8 @@ body::after{content:"";position:fixed;inset:0;z-index:9999;pointer-events:none;o
       <p class="lede" style="margin-top:18px">Every session, every booking, every metric in one place. Spend less time on admin, more time on your craft.</p>
       <ul class="feature-list">
         <li><span class="fl-ic"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg></span><div><b>Your calendar, filled</b><p>Set availability once. Bookings manage themselves.</p></div></li>
-        <li><span class="fl-ic"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M13 2 4 14h6l-1 8 9-12h-6l1-8Z"/></svg></span><div><b>Paid on Friday</b><p>Fees settle to your account automatically.</p></div></li>
-        <li><span class="fl-ic"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M3 17l6-6 4 4 8-8"/><path d="M15 7h6v6"/></svg></span><div><b>Every trainee on record</b><p>Attendance, notes and milestones, tracked for you.</p></div></li>
+        <li><span class="fl-ic"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M13 2 4 14h6l-1 8 9-12h-6l1-8Z"/></svg></span><div><b>Get paid instantly</b><p>Fees settle to your account automatically.</p></div></li>
+        <li><span class="fl-ic"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M3 17l6-6 4 4 8-8"/><path d="M15 7h6v6"/></svg></span><div><b>Every trainee on record</b><p>Attendance, notes and milestones, tracked for you and your trainees.</p></div></li>
       </ul>
     </div>
     <div class="sc-stage rv">
@@ -1426,8 +1428,14 @@ body::after{content:"";position:fixed;inset:0;z-index:9999;pointer-events:none;o
   <div class="wrap booking flip">
     <div class="rv">
       <span class="eyebrow">Bookings</span>
-      <h2 class="h-l mask-line" id="bookTitle">Bookings made effortless.</h2>
-      <p class="lede" style="margin-top:18px">Coach, location, level, price, package. Chosen in a few taps, and your trainees book in seconds. Try the exact flow below.</p>
+      <h2 class="h-l mask-line" id="bookTitle">Group bookings made effortless.</h2>
+      <p class="lede" style="margin-top:18px">Coach, location, level, price, package. Chosen in a few taps, and your trainees book in seconds. Here's the whole flow.</p>
+      <ul class="feature-list">
+        <li><span class="fl-ic"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg></span><div><b>Pick a session</b><p>Group programmes filtered by sport, level and price.</p></div></li>
+        <li><span class="fl-ic"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><rect x="3" y="4" width="18" height="17" rx="3"/><path d="M8 2v4M16 2v4M3 10h18"/></svg></span><div><b>See the details</b><p>Coach, dates, location and spaces left, at a glance.</p></div></li>
+        <li><span class="fl-ic"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M12 2v20M17 6H9.5a3 3 0 0 0 0 6h5a3 3 0 0 1 0 6H6"/></svg></span><div><b>Confirm &amp; pay</b><p>Live slots secured in seconds with a saved card.</p></div></li>
+        <li><span class="fl-ic"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M20 6 9 17l-5-5"/></svg></span><div><b>Booked instantly</b><p>Receipt sent and calendar updated, right away.</p></div></li>
+      </ul>
     </div>
     <div class="bkf-root rv">
 <div class="phone">
