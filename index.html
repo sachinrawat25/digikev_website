@@ -1076,7 +1076,7 @@ body::after{content:"";position:fixed;inset:0;z-index:9999;pointer-events:none;o
 .tr-root .crow{display:flex;align-items:center;gap:12px;width:100%;text-align:left;background:var(--fb-card);border:1px solid var(--fb-line);border-radius:18px;padding:13px;margin-bottom:11px;cursor:pointer;font:inherit;color:inherit;transition:border-color .15s var(--ease),transform .12s}
 .tr-root .crow:hover{border-color:color-mix(in oklab,var(--fb-acc) 45%,transparent)}
 .tr-root .crow:active{transform:scale(.99)}
-.tr-root .ci{width:44px;height:44px;border-radius:14px;display:grid;place-items:center;font-family:var(--font-display);font-weight:800;font-size:15px;color:#04120B;flex-shrink:0;background:linear-gradient(135deg,var(--c1,var(--fb-acc)),var(--c2,var(--fb-acc-2)))}
+.tr-root .ci{width:50px;height:50px;border-radius:16px;display:grid;place-items:center;font-family:var(--font-display);font-weight:800;font-size:15px;color:#04120B;flex-shrink:0;background:linear-gradient(135deg,var(--c1,var(--fb-acc)),var(--c2,var(--fb-acc-2)));object-fit:cover}
 .tr-root .crow .cin{flex:1;min-width:0}
 .tr-root .crow .cin b{font-size:13.5px;display:block;letter-spacing:-.01em;color:var(--fb-ink)}
 .tr-root .crow .cin span{font-size:11px;color:var(--fb-muted);display:flex;align-items:center;gap:5px;margin-top:2px}
@@ -1582,16 +1582,19 @@ body::after{content:"";position:fixed;inset:0;z-index:9999;pointer-events:none;o
           <div class="tb"><h2>Book a coach</h2><span class="ic"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"><path d="M4 6h16M7 12h10M10 18h4"/></svg></span></div>
           <div class="chips"><span class="chip on">All</span><span class="chip">Tennis</span><span class="chip">Squash</span><span class="chip">Padel</span></div>
           <div class="slabel">Top coaches · near you</div>
-          <button class="crow" data-init="JE" data-name="Jordan Ellis" data-spec="Tennis" data-rate="42" data-rating="4.9" style="--c1:#2FD98C;--c2:#27C07C">
-            <span class="ci">JE</span><div class="cin"><b>Jordan Ellis</b><span><i class="star">★</i> 4.9 · Tennis · Level 3</span></div>
+          <button class="crow" data-img="assets/cards/photo-1704223523169-52feeed90365.avif" data-name="Jordan Ellis" data-spec="Tennis" data-rate="42" data-rating="4.9">
+            <img class="ci" src="assets/cards/photo-1704223523169-52feeed90365.avif" alt="Jordan Ellis">
+            <div class="cin"><b>Jordan Ellis</b><span><i class="star">★</i> 4.9 · Tennis · Level 3</span></div>
             <div class="crate"><b>£42</b><span>/hr</span></div><span class="cgo"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M9 6l6 6-6 6"/></svg></span>
           </button>
-          <button class="crow" data-init="PN" data-name="Priya Nair" data-spec="Squash" data-rate="36" data-rating="4.8" style="--c1:#F6C453;--c2:#E0A93B">
-            <span class="ci">PN</span><div class="cin"><b>Priya Nair</b><span><i class="star">★</i> 4.8 · Squash · 8 yrs</span></div>
+          <button class="crow" data-img="assets/cards/photo-1696563996353-214a3690bb11.avif" data-name="Priya Nair" data-spec="Squash" data-rate="36" data-rating="4.8">
+            <img class="ci" src="assets/cards/photo-1696563996353-214a3690bb11.avif" alt="Priya Nair">
+            <div class="cin"><b>Priya Nair</b><span><i class="star">★</i> 4.8 · Squash · 8 yrs</span></div>
             <div class="crate"><b>£36</b><span>/hr</span></div><span class="cgo"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M9 6l6 6-6 6"/></svg></span>
           </button>
-          <button class="crow" data-init="MR" data-name="Marcus Reed" data-spec="Padel" data-rate="40" data-rating="4.7" style="--c1:#7C5CFF;--c2:#5E43D8">
-            <span class="ci">MR</span><div class="cin"><b>Marcus Reed</b><span><i class="star">★</i> 4.7 · Padel · Level 2</span></div>
+          <button class="crow" data-img="assets/cards/photo-1606902965551-dce093cda6e7.avif" data-name="Marcus Reed" data-spec="Padel" data-rate="40" data-rating="4.7">
+            <img class="ci" src="assets/cards/photo-1606902965551-dce093cda6e7.avif" alt="Marcus Reed">
+            <div class="cin"><b>Marcus Reed</b><span><i class="star">★</i> 4.7 · Padel · Level 2</span></div>
             <div class="crate"><b>£40</b><span>/hr</span></div><span class="cgo"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M9 6l6 6-6 6"/></svg></span>
           </button>
         </div>
@@ -1601,7 +1604,7 @@ body::after{content:"";position:fixed;inset:0;z-index:9999;pointer-events:none;o
       <div class="scr" id="tr-pick" data-s="right">
         <div class="body">
           <div class="tb"><span class="bk" id="tr-backBtn"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M15 6l-6 6 6 6"/></svg></span></div>
-          <div class="pcard"><span class="ci" id="tr-pcInit">JE</span><div><b id="tr-pcName">Jordan Ellis</b><div class="st"><span class="star">★</span> <span id="tr-pcRating">4.9</span> · <span id="tr-pcSpec">Tennis</span></div></div></div>
+          <div class="pcard"><img class="ci" id="tr-pcImg" src="assets/cards/photo-1704223523169-52feeed90365.avif" alt="Jordan Ellis"><div><b id="tr-pcName">Jordan Ellis</b><div class="st"><span class="star">★</span> <span id="tr-pcRating">4.9</span> · <span id="tr-pcSpec">Tennis</span></div></div></div>
           <div class="tlabel">Choose a day</div>
           <div class="days" id="tr-days"><button class="day on">Today</button><button class="day">Tomorrow</button><button class="day">Fri 18</button></div>
           <div class="tlabel">Available times</div>
@@ -2809,9 +2812,9 @@ document.querySelectorAll(".faq").forEach(faq => {
   });
 
   list.querySelectorAll(".crow").forEach(row => row.addEventListener("click", () => {
-    coach = { name:row.dataset.name, init:row.dataset.init, rate:row.dataset.rate, spec:row.dataset.spec, rating:row.dataset.rating };
-    $("pcInit").textContent = coach.init;
-    $("pcInit").style.background = "linear-gradient(135deg," + row.style.getPropertyValue("--c1") + "," + row.style.getPropertyValue("--c2") + ")";
+    coach = { name:row.dataset.name, img:row.dataset.img, rate:row.dataset.rate, spec:row.dataset.spec, rating:row.dataset.rating };
+    $("pcImg").src = coach.img;
+    $("pcImg").alt = coach.name;
     $("pcName").textContent = coach.name; $("pcRating").textContent = coach.rating; $("pcSpec").textContent = coach.spec;
     $("bookBtn").firstChild.textContent = "Book session · £" + coach.rate + " ";
     show(pick, list);
