@@ -149,7 +149,7 @@ h1,h2,h3{font-family:var(--font-display);line-height:1.02;letter-spacing:-.025em
 .nav-menu{display:none;flex-direction:column;gap:3px;margin-top:8px;padding:11px;border-radius:18px;background:var(--glass);border:1px solid var(--line);backdrop-filter:blur(20px) saturate(1.4);-webkit-backdrop-filter:blur(20px) saturate(1.4);box-shadow:var(--shadow-l)}
 .nav-menu a{padding:12px 14px;border-radius:12px;font-size:15px;font-weight:500;color:var(--ink2);transition:color .2s,background .2s}
 .nav-menu a:hover{background:var(--bg3);color:var(--ink)}
-.nav-menu .btn{margin-top:6px;justify-content:center}
+.nav-menu .btn{margin-top:6px;justify-content:center;box-shadow:0 4px 14px rgba(21,83,240,.28)}
 
 /* ============ HERO ============ */
 .hero{
@@ -660,7 +660,10 @@ body::after{content:"";position:fixed;inset:0;z-index:9999;pointer-events:none;o
   .sports-grid{grid-template-columns:repeat(2,1fr)}
   .stats-grid{grid-template-columns:1fr 1fr}
   .foot-grid{grid-template-columns:1fr}
-  .hero-meta{gap:20px}
+  .hero-meta{gap:12px;flex-wrap:nowrap;justify-content:space-between;width:100%}
+  .hero-meta div{padding-left:10px;flex:1}
+  .hero-meta strong{font-size:16px}
+  .hero-meta span{font-size:10px;white-space:nowrap}
   .float-card{min-width:160px;padding:11px 13px}
   .tabs-bar{width:100%;overflow-x:auto}
 }
@@ -1205,7 +1208,7 @@ body::after{content:"";position:fixed;inset:0;z-index:9999;pointer-events:none;o
         <a class="btn btn-primary magnetic" href="#cta" data-demo>Let's get started <span class="arr">→</span></a>
       </div>
       <div class="hero-meta">
-        <div><strong>From just £1</strong><span>Per user / month</span></div>
+        <div><strong>From £1</strong><span>Per user / month</span></div>
         <div><strong>1 week</strong><span>To go live</span></div>
         <div><strong>&gt;10</strong><span>Sports supported</span></div>
       </div>
