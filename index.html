@@ -796,7 +796,7 @@ body::after{content:"";position:fixed;inset:0;z-index:9999;pointer-events:none;o
   --app-line:#26303F;--app-chip:#1E2735;--app-blue:#2E7DFF;--app-blue-2:#4C93FF;--app-dark:#2A3444;
   --app-gold:#F5C451;--app-green:#2ED47F;--ease:cubic-bezier(.22,1,.36,1);--ink-2:var(--ink2)}
 .bkf-root *,.bkf-root *::before,.bkf-root *::after{box-sizing:border-box}
-.bkf-root .screen{filter:blur(1.3px) saturate(.92) brightness(.96)}   /* only high-level details read through */
+.bkf-root .screen{filter:none}   /* only high-level details read through */
 /* neutralise the page's base .phone/.screen rules that bleed onto the ported phone; zoom = smaller phone */
 .bkf-root .phone{position:relative!important;left:auto!important;top:auto!important;translate:none!important;transform:none!important;transform-style:flat!important;zoom:.8}
 .bkf-root .screen::after{content:none!important;display:none!important;animation:none!important}
@@ -1048,7 +1048,7 @@ body::after{content:"";position:fixed;inset:0;z-index:9999;pointer-events:none;o
 .tr-root{display:flex;flex-direction:column;align-items:center;
   --fb-bg:#0E1116;--fb-card:#181D25;--fb-card2:#20262F;--fb-line:#2A313B;
   --fb-ink:#EAEEF3;--fb-muted:#8B94A2;--fb-faint:#5C6675;
-  --fb-acc:#2FD98C;--fb-acc-2:#27C07C;--fb-gold:#F6C453}
+  --fb-acc:#2E7DFF;--fb-acc-2:#4C93FF;--fb-gold:#FFB000;--fb-green:#2ED47F}
 .tr-root *,.tr-root *::before,.tr-root *::after{box-sizing:border-box}
 .tr-root .phone{position:relative!important;left:auto!important;top:auto!important;translate:none!important;transform:none!important;transform-style:flat!important;width:300px!important;zoom:.8}
 .tr-root .screen::after{content:none!important;display:none!important;animation:none!important}
@@ -1064,60 +1064,83 @@ body::after{content:"";position:fixed;inset:0;z-index:9999;pointer-events:none;o
 .tr-root .body{flex:1;overflow-y:auto;padding:2px 16px 14px;-webkit-overflow-scrolling:touch}
 .tr-root .body::-webkit-scrollbar{width:0}
 
-.tr-root .tb{display:flex;align-items:center;justify-content:space-between;padding:6px 2px 14px}
-.tr-root .tb h2{font-family:var(--font-display);font-weight:700;font-size:20px;letter-spacing:-.02em;color:var(--fb-ink)}
-.tr-root .tb .ic{width:36px;height:36px;border-radius:12px;background:var(--fb-card);border:1px solid var(--fb-line);display:grid;place-items:center;color:var(--fb-muted)}
-.tr-root .tb .bk{width:34px;height:34px;border-radius:11px;background:var(--fb-card);border:1px solid var(--fb-line);display:grid;place-items:center;color:var(--fb-ink);cursor:pointer}
-.tr-root .chips{display:flex;gap:8px;overflow:hidden;margin-bottom:16px}
-.tr-root .chip{font-size:12px;font-weight:600;color:var(--fb-muted);background:var(--fb-card);border:1px solid var(--fb-line);border-radius:99px;padding:8px 14px;white-space:nowrap;cursor:pointer}
-.tr-root .chip.on{color:#04120B;background:var(--fb-acc);border-color:transparent}
-.tr-root .slabel{font-family:var(--font-mono);font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:var(--fb-faint);margin:0 2px 10px}
 
-.tr-root .crow{display:flex;align-items:center;gap:12px;width:100%;text-align:left;background:var(--fb-card);border:1px solid var(--fb-line);border-radius:18px;padding:13px;margin-bottom:11px;cursor:pointer;font:inherit;color:inherit;transition:border-color .15s var(--ease),transform .12s}
-.tr-root .crow:hover{border-color:color-mix(in oklab,var(--fb-acc) 45%,transparent)}
+
+/* Toggle buttons */
+.tr-root .tr-toggle{display:flex;background:var(--fb-card);border:1px solid var(--fb-line);border-radius:14px;padding:4px;margin-bottom:16px}
+.tr-root .tr-toggle-btn{flex:1;border:none;background:none;padding:9px;font-size:12px;font-weight:600;color:var(--fb-muted);border-radius:10px;cursor:pointer;transition:all .2s var(--ease)}
+.tr-root .tr-toggle-btn.active{background:linear-gradient(135deg, var(--fb-acc), var(--fb-acc-2));color:#fff;box-shadow:0 4px 10px rgba(46,125,255,0.25)}
+
+/* Submenu */
+.tr-root .tr-submenu{display:flex;justify-content:space-between;align-items:center;font-size:11.5px;color:var(--fb-muted);margin:0 2px 10px}
+.tr-root .tr-count{font-weight:500}
+.tr-root .tr-filter{color:var(--fb-acc);font-weight:700;display:flex;align-items:center;gap:4px;cursor:pointer}
+
+/* Coach row */
+.tr-root .crow{display:flex;flex-direction:column;gap:12px;width:100%;text-align:left;background:var(--fb-card);border:1px solid var(--fb-line);border-radius:20px;padding:14px 16px;margin-bottom:12px;cursor:pointer;font:inherit;color:inherit;box-shadow:0 4px 16px rgba(0,0,0,0.12);transition:all .15s var(--ease);will-change:transform,border-color}
+.tr-root .crow:hover{border-color:var(--fb-acc);transform:translateY(-1px);box-shadow:0 8px 24px rgba(0,0,0,0.2)}
 .tr-root .crow:active{transform:scale(.99)}
-.tr-root .ci{width:50px;height:50px;border-radius:16px;display:grid;place-items:center;font-family:var(--font-display);font-weight:800;font-size:15px;color:#04120B;flex-shrink:0;background:linear-gradient(135deg,var(--c1,var(--fb-acc)),var(--c2,var(--fb-acc-2)));object-fit:cover}
-.tr-root .crow .cin{flex:1;min-width:0}
-.tr-root .crow .cin b{font-size:13.5px;display:block;letter-spacing:-.01em;color:var(--fb-ink)}
-.tr-root .crow .cin span{font-size:11px;color:var(--fb-muted);display:flex;align-items:center;gap:5px;margin-top:2px}
-.tr-root .crow .cin .star{color:var(--fb-gold)}
-.tr-root .crow .crate{text-align:right;flex-shrink:0}
-.tr-root .crow .crate b{font-family:var(--font-display);font-weight:800;font-size:15px;color:var(--fb-ink)}
-.tr-root .crow .crate span{font-size:9px;color:var(--fb-muted)}
-.tr-root .crow .cgo{width:26px;height:26px;border-radius:50%;background:var(--fb-card2);border:1px solid var(--fb-line);display:grid;place-items:center;color:var(--fb-muted);flex-shrink:0}
 
-.tr-root .pcard{display:flex;align-items:center;gap:12px;background:var(--fb-card);border:1px solid var(--fb-line);border-radius:18px;padding:13px;margin:2px 0 16px}
-.tr-root .pcard b{color:var(--fb-ink)}
+.tr-root .crow-top{display:flex;align-items:center;gap:12px;width:100%}
+.tr-root .ci{width:44px;height:44px;border-radius:14px;display:grid;place-items:center;font-family:var(--font-display);font-weight:800;font-size:15px;color:#04120B;flex-shrink:0;background:linear-gradient(135deg,var(--c1,var(--fb-acc)),var(--c2,var(--fb-acc-2)));object-fit:cover}
+.tr-root .pcard .ci{width:56px;height:56px;border-radius:16px}
+.tr-root .crow .cin{flex:1;min-width:0;text-align:left}
+.tr-root .cin b{font-size:14.5px;display:block;letter-spacing:-.015em;color:var(--fb-ink);font-weight:700}
+.tr-root .cin span{font-size:11px;color:var(--fb-muted);display:block;margin-top:2px}
+.tr-root .cstar{font-size:11px;font-weight:700;display:flex;align-items:center;gap:3px;background:rgba(255,176,0,0.15);color:var(--fb-gold);padding:4px 8px;border-radius:8px;flex-shrink:0}
+
+.tr-root .crow-bot{display:flex;align-items:center;justify-content:space-between;padding-top:10px;border-top:1px dashed var(--fb-line);width:100%}
+.tr-root .cprice{font-size:11px;color:var(--fb-muted)}
+.tr-root .cprice b{font-size:19px;font-weight:800;color:var(--fb-ink);margin-right:2px}
+.tr-root .cbtn{background:var(--fb-card2);border:1px solid var(--fb-line);color:var(--fb-ink);font-size:11px;font-weight:600;padding:7px 14px;border-radius:99px;display:inline-flex;align-items:center;gap:4px;transition:all .2s}
+.tr-root .crow:hover .cbtn{background:var(--fb-acc)}
+
+/* Detail Picker Card */
+.tr-root .pcard{display:flex;align-items:center;gap:14px;background:var(--fb-card);border:1px solid var(--fb-line);border-radius:20px;padding:14px 16px;margin:2px 0 16px;box-shadow:0 4px 16px rgba(0,0,0,0.12)}
+.tr-root .pcard .ci{width:56px;height:56px;border-radius:50%}
+.tr-root .pcard b{font-size:15px;color:var(--fb-ink);font-weight:700}
 .tr-root .pcard .st{font-size:11.5px;color:var(--fb-muted);margin-top:2px}
-.tr-root .pcard .st .star{color:var(--fb-gold);font-weight:700}
-.tr-root .tlabel{font-family:var(--font-mono);font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:var(--fb-faint);margin:2px 2px 10px}
+.tr-root .pcard .st .star{color:var(--fb-gold);font-weight:700;margin-right:2px}
+
+.tr-root .tb{display:flex;align-items:center;justify-content:space-between;padding:6px 2px 14px}
+.tr-root .tb .bk{width:34px;height:34px;border-radius:50%;background:var(--fb-card);border:1px solid var(--fb-line);display:grid;place-items:center;color:var(--fb-ink);cursor:pointer;box-shadow:0 2px 6px rgba(0,0,0,0.12)}
+
+.tr-root .tlabel{font-family:var(--font-mono);font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:var(--fb-muted);margin:2px 2px 10px;text-align:left}
 .tr-root .days{display:flex;gap:8px;margin-bottom:18px}
 .tr-root .day{flex:1;text-align:center;background:var(--fb-card);border:1px solid var(--fb-line);border-radius:13px;padding:11px 4px;font-size:12px;font-weight:600;color:var(--fb-ink);cursor:pointer;transition:all .15s}
-.tr-root .day.on{background:color-mix(in oklab,var(--fb-acc) 14%,var(--fb-card));border-color:var(--fb-acc);color:var(--fb-acc)}
+.tr-root .day.on{background:var(--fb-acc);border-color:transparent;color:#fff;box-shadow:0 4px 12px rgba(46,125,255,0.2)}
+
 .tr-root .tgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
 .tr-root .ts{background:var(--fb-card);border:1px solid var(--fb-line);border-radius:12px;padding:13px 4px;font-family:var(--font-display);font-weight:700;font-size:14px;color:var(--fb-ink);cursor:pointer;transition:all .13s}
-.tr-root .ts.on{background:var(--fb-acc);border-color:transparent;color:#04120B}
-.tr-root .ts.off{opacity:.35;text-decoration:line-through;cursor:not-allowed}
+.tr-root .ts.on{background:var(--fb-acc);border-color:transparent;color:#fff;box-shadow:0 4px 12px rgba(46,125,255,0.2)}
+.tr-root .ts.off{opacity:.35;text-decoration:line-through;cursor:not-allowed;background:rgba(16,24,40,0.03);border-color:transparent}
 
 .tr-root .actionbar{padding:12px 16px 18px}
-.tr-root .btn{width:100%;display:inline-flex;align-items:center;justify-content:center;gap:9px;background:var(--fb-acc);color:#04120B;font-weight:800;font-size:14px;padding:15px;border-radius:15px;border:none;cursor:pointer;font-family:inherit;box-shadow:0 10px 24px color-mix(in oklab,var(--fb-acc) 32%,transparent)}
+.tr-root .btn{width:100%;display:inline-flex;align-items:center;justify-content:center;gap:9px;background:linear-gradient(135deg, var(--fb-acc), var(--fb-acc-2));color:#fff;font-weight:800;font-size:14px;padding:15px;border-radius:15px;border:none;cursor:pointer;font-family:inherit;box-shadow:0 8px 20px rgba(46,125,255,0.25);transition:transform .15s var(--ease)}
+.tr-root .btn:active{transform:scale(.98)}
 
 .tr-root .done{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:0 30px;gap:6px}
-.tr-root .done .ck{width:88px;height:88px;border-radius:50%;background:color-mix(in oklab,var(--fb-acc) 16%,transparent);color:var(--fb-acc);display:grid;place-items:center;margin-bottom:14px}
-.tr-root .done h3{font-family:var(--font-display);font-weight:800;font-size:24px;letter-spacing:-.02em;color:var(--fb-ink)}
-.tr-root .done p{font-size:13px;color:var(--fb-muted);max-width:26ch}
+.tr-root .done .ck{width:88px;height:88px;border-radius:50%;background:rgba(46,213,127,0.12);color:var(--fb-green);display:grid;place-items:center;margin-bottom:14px}
+.tr-root .done h3{font-family:var(--font-display);font-weight:800;font-size:24px;letter-spacing:-.025em;color:var(--fb-ink)}
+.tr-root .done p{font-size:13px;color:var(--fb-muted);max-width:26ch;line-height:1.4}
 .tr-root .done .rc{font-family:var(--font-mono);font-size:10.5px;letter-spacing:.06em;color:var(--fb-faint);margin-top:6px}
 .tr-root .done .btn{margin-top:22px;width:auto;padding:14px 26px}
 
-/* persistent floating "it's interactive" card + demo pill (same UX pattern as other live demos) */
+/* Tab bar navigation */
+.tr-root .tr-nav{display:flex;justify-content:space-around;align-items:center;padding:9px 6px 15px;background:var(--fb-card);border-top:1px solid var(--fb-line);flex-shrink:0;margin-top:auto}
+.tr-root .tr-nav span{display:grid;place-items:center;gap:3px;font-size:8.5px;font-weight:600;color:var(--fb-faint)}
+.tr-root .tr-nav span svg{width:20px;height:20px}
+.tr-root .tr-nav span.on{color:var(--fb-acc)}
+
+/* persistent floating "it's interactive" card + demo pill */
 .tr-root .tr-float{position:absolute;z-index:30;top:-15px;left:-20px;display:flex;align-items:center;gap:9px;background:#fff;border-radius:13px;padding:9px 12px;box-shadow:0 20px 44px rgba(0,0,0,.42),0 4px 12px rgba(0,0,0,.2);animation:trBob 2.8s cubic-bezier(.22,1,.36,1) infinite;pointer-events:none;white-space:nowrap}
-.tr-root .tr-float .fic{width:32px;height:32px;border-radius:10px;background:linear-gradient(120deg,var(--fb-acc),var(--fb-acc-2));display:grid;place-items:center;color:#04120B;flex-shrink:0}
+.tr-root .tr-float .fic{width:32px;height:32px;border-radius:10px;background:linear-gradient(120deg,var(--fb-acc),var(--fb-acc-2));display:grid;place-items:center;color:#fff;flex-shrink:0}
 .tr-root .tr-float b{display:block;font-family:var(--font-display);font-weight:700;font-size:12px;color:#16181D;letter-spacing:-.01em;line-height:1.15}
 .tr-root .tr-float div span{font-size:10px;color:#6B7280}
 @keyframes trBob{0%,100%{transform:translateY(0)}50%{transform:translateY(-7px)}}
-.tr-root .tr-hint{margin-top:16px;display:inline-flex;align-items:center;gap:9px;font-family:var(--font-mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:#7FE0B8;background:rgba(47,217,140,.1);border:1px solid rgba(47,217,140,.3);padding:9px 16px;border-radius:99px}
+.tr-root .tr-hint{margin-top:16px;display:inline-flex;align-items:center;gap:9px;font-family:var(--font-mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--fb-acc);background:rgba(46,125,255,0.08);border:1px solid rgba(46,125,255,0.2);padding:9px 16px;border-radius:99px}
 .tr-root .tr-hint .dot{width:7px;height:7px;border-radius:50%;background:var(--fb-acc);animation:trPing 1.8s ease-out infinite}
-@keyframes trPing{0%{box-shadow:0 0 0 0 rgba(47,217,140,.55)}70%{box-shadow:0 0 0 8px rgba(47,217,140,0)}100%{box-shadow:0 0 0 0 rgba(47,217,140,0)}}
+@keyframes trPing{0%{box-shadow:0 0 0 0 rgba(46,125,255,0.5)}70%{box-shadow:0 0 0 8px rgba(46,125,255,0)}100%{box-shadow:0 0 0 0 rgba(46,125,255,0)}}
 @media (prefers-reduced-motion:reduce){.tr-root .tr-float,.tr-root .tr-hint .dot{animation:none}}
 /* ===== concept-3 cascade+bell notifications (Communication), scoped & isolated ===== */
 .nc-root{display:flex;flex-direction:column;align-items:center;
@@ -1365,13 +1388,6 @@ body::after{content:"";position:fixed;inset:0;z-index:9999;pointer-events:none;o
     <!-- ============ SCREEN 1 · BOOK NOW LIST ============ -->
     <div class="scr" id="bkf-s1">
       <div class="statusbar"><span>19:22</span><span class="r">5G ▪▪▪ &nbsp;🔋</span></div>
-      <div class="home-hd">
-        <div><div class="sub">Sunday, 12 Jul</div><h2>Hello, Sachin.</h2></div>
-        <div class="hd-ic">
-          <span class="bell"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"><path d="M18 8a6 6 0 0 0-12 0c0 7-3 9-3 9h18s-3-2-3-9M13.7 21a2 2 0 0 1-3.4 0"/></svg></span>
-          <span class="me" style="background-image:url(data:image/jpeg;base64,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)"></span>
-        </div>
-      </div>
       <div class="scr-body">
         <div class="toggle"><button class="on">Group sessions</button><button>1-to-1 sessions</button></div>
         <div class="search"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="m20 20-3-3"/></svg>Search programmes, coaches…<svg class="mic" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="9" y="3" width="6" height="11" rx="3"/><path d="M6 11a6 6 0 0 0 12 0M12 17v4"/></svg></div>
@@ -1570,67 +1586,119 @@ body::after{content:"";position:fixed;inset:0;z-index:9999;pointer-events:none;o
     </div>
     <div class="sc-stage rv">
       <div class="tr-root">
-<div class="phone">
-        <div class="tr-float" aria-hidden="true"><span class="fic"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11V6a2 2 0 0 1 4 0v5"/><path d="M13 8a2 2 0 0 1 4 0v4"/><path d="M17 10a2 2 0 0 1 4 0v3a7 7 0 0 1-7 7h-1a6 6 0 0 1-5-3l-2.4-4a2 2 0 0 1 3.4-2L9 14"/></svg></span><div><b>It's interactive</b><span>tap a coach to try out</span></div></div>
-  <div class="screen">
-    <div class="statusbar"><span>9:41</span><span class="r">5G ▪▪▪ &nbsp;🔋</span></div>
-    <div class="stack">
-
-      <!-- 1 · COACHES -->
-      <div class="scr" id="tr-list" data-s="in">
-        <div class="body">
-          <div class="tb"><h2>Book a coach</h2><span class="ic"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"><path d="M4 6h16M7 12h10M10 18h4"/></svg></span></div>
-          <div class="chips"><span class="chip on">All</span><span class="chip">Tennis</span><span class="chip">Squash</span><span class="chip">Padel</span></div>
-          <div class="slabel">Top coaches · near you</div>
-          <button class="crow" data-img="assets/cards/photo-1704223523169-52feeed90365.avif" data-name="Jordan Ellis" data-spec="Tennis" data-rate="42" data-rating="4.9">
-            <img class="ci" src="assets/cards/photo-1704223523169-52feeed90365.avif" alt="Jordan Ellis">
-            <div class="cin"><b>Jordan Ellis</b><span><i class="star">★</i> 4.9 · Tennis · Level 3</span></div>
-            <div class="crate"><b>£42</b><span>/hr</span></div><span class="cgo"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M9 6l6 6-6 6"/></svg></span>
-          </button>
-          <button class="crow" data-img="assets/cards/photo-1696563996353-214a3690bb11.avif" data-name="Priya Nair" data-spec="Squash" data-rate="36" data-rating="4.8">
-            <img class="ci" src="assets/cards/photo-1696563996353-214a3690bb11.avif" alt="Priya Nair">
-            <div class="cin"><b>Priya Nair</b><span><i class="star">★</i> 4.8 · Squash · 8 yrs</span></div>
-            <div class="crate"><b>£36</b><span>/hr</span></div><span class="cgo"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M9 6l6 6-6 6"/></svg></span>
-          </button>
-          <button class="crow" data-img="assets/cards/photo-1606902965551-dce093cda6e7.avif" data-name="Marcus Reed" data-spec="Padel" data-rate="40" data-rating="4.7">
-            <img class="ci" src="assets/cards/photo-1606902965551-dce093cda6e7.avif" alt="Marcus Reed">
-            <div class="cin"><b>Marcus Reed</b><span><i class="star">★</i> 4.7 · Padel · Level 2</span></div>
-            <div class="crate"><b>£40</b><span>/hr</span></div><span class="cgo"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M9 6l6 6-6 6"/></svg></span>
-          </button>
-        </div>
-      </div>
-
-      <!-- 2 · PICK TIME -->
-      <div class="scr" id="tr-pick" data-s="right">
-        <div class="body">
-          <div class="tb"><span class="bk" id="tr-backBtn"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M15 6l-6 6 6 6"/></svg></span></div>
-          <div class="pcard"><img class="ci" id="tr-pcImg" src="assets/cards/photo-1704223523169-52feeed90365.avif" alt="Jordan Ellis"><div><b id="tr-pcName">Jordan Ellis</b><div class="st"><span class="star">★</span> <span id="tr-pcRating">4.9</span> · <span id="tr-pcSpec">Tennis</span></div></div></div>
-          <div class="tlabel">Choose a day</div>
-          <div class="days" id="tr-days"><button class="day on">Today</button><button class="day">Tomorrow</button><button class="day">Fri 18</button></div>
-          <div class="tlabel">Available times</div>
-          <div class="tgrid" id="tr-grid">
-            <button class="ts">07:00</button><button class="ts on">08:00</button><button class="ts">09:00</button>
-            <button class="ts">17:00</button><button class="ts">18:00</button><button class="ts off">19:00</button>
+        <div class="phone">
+          <div class="tr-float" aria-hidden="true">
+            <span class="fic"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11V6a2 2 0 0 1 4 0v5"/><path d="M13 8a2 2 0 0 1 4 0v4"/><path d="M17 10a2 2 0 0 1 4 0v3a7 7 0 0 1-7 7h-1a6 6 0 0 1-5-3l-2.4-4a2 2 0 0 1 3.4-2L9 14"/></svg></span>
+            <div><b>It's interactive</b><span>tap a coach to try out</span></div>
           </div>
-        </div>
-        <div class="actionbar"><button class="btn" id="tr-bookBtn">Book session · £42 <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button></div>
-      </div>
+          <div class="screen">
+            <div class="statusbar"><span>9:41</span><span class="r">5G ▪▪▪ &nbsp;🔋</span></div>
+            <div class="stack">
+              <!-- 1 · COACHES -->
+              <div class="scr" id="tr-list" data-s="in">
+                <div class="body">
+                  <div class="tr-toggle">
+                    <button class="tr-toggle-btn">Group sessions</button>
+                    <button class="tr-toggle-btn active">1-to-1 sessions</button>
+                  </div>
+                  <div class="tr-submenu">
+                    <span class="tr-count">3 coaches</span>
+                    <span class="tr-filter"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M4 6h16M7 12h10M10 18h4"/></svg> Filter</span>
+                  </div>
+                  
+                  <button class="crow" data-img="assets/cards/photo-1704223523169-52feeed90365.avif" data-name="Daniel Whitmore" data-spec="Squash" data-rate="45" data-rating="4.8">
+                    <div class="crow-top">
+                      <img class="ci" src="assets/cards/photo-1704223523169-52feeed90365.avif" alt="Daniel Whitmore">
+                      <div class="cin">
+                        <b>Daniel Whitmore</b>
+                        <span>Squash · 12 yrs experience</span>
+                      </div>
+                      <div class="cstar">★ 4.8</div>
+                    </div>
+                    <div class="crow-bot">
+                      <div class="cprice"><b>£45</b>/hr</div>
+                      <div class="cbtn">View times <span class="arr">→</span></div>
+                    </div>
+                  </button>
 
-      <!-- 3 · BOOKED -->
-      <div class="scr" id="tr-done" data-s="right">
-        <div class="done">
-          <div class="ck"><svg width="44" height="44" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></div>
-          <h3>Session booked.</h3>
-          <p id="tr-doneSummary">Jordan Ellis · Today 08:00. See you on court.</p>
-          <div class="rc" id="tr-doneRcpt">£42 · ADDED TO CALENDAR</div>
-          <button class="btn" id="tr-againBtn">Book another <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
+                  <button class="crow" data-img="assets/cards/photo-1696563996353-214a3690bb11.avif" data-name="Priya Nair" data-spec="Tennis" data-rate="36" data-rating="4.9">
+                    <div class="crow-top">
+                      <img class="ci" src="assets/cards/photo-1696563996353-214a3690bb11.avif" alt="Priya Nair">
+                      <div class="cin">
+                        <b>Priya Nair</b>
+                        <span>Tennis · 8 yrs experience</span>
+                      </div>
+                      <div class="cstar">★ 4.9</div>
+                    </div>
+                    <div class="crow-bot">
+                      <div class="cprice"><b>£36</b>/hr</div>
+                      <div class="cbtn">View times <span class="arr">→</span></div>
+                    </div>
+                  </button>
+
+                  <button class="crow" data-img="assets/cards/photo-1606902965551-dce093cda6e7.avif" data-name="Marcus Reed" data-spec="Padel" data-rate="40" data-rating="4.7">
+                    <div class="crow-top">
+                      <img class="ci" src="assets/cards/photo-1606902965551-dce093cda6e7.avif" alt="Marcus Reed">
+                      <div class="cin">
+                        <b>Marcus Reed</b>
+                        <span>Padel · Level 2 coach</span>
+                      </div>
+                      <div class="cstar">★ 4.7</div>
+                    </div>
+                    <div class="crow-bot">
+                      <div class="cprice"><b>£40</b>/hr</div>
+                      <div class="cbtn">View times <span class="arr">→</span></div>
+                    </div>
+                  </button>
+                </div>
+              </div>
+
+              <!-- 2 · PICK TIME -->
+              <div class="scr" id="tr-pick" data-s="right">
+                <div class="body">
+                  <div class="tb"><span class="bk" id="tr-backBtn"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M15 6l-6 6 6 6"/></svg></span></div>
+                  <div class="pcard">
+                    <img class="ci" id="tr-pcImg" src="assets/cards/photo-1704223523169-52feeed90365.avif" alt="Daniel Whitmore">
+                    <div>
+                      <b id="tr-pcName">Daniel Whitmore</b>
+                      <div class="st"><span class="star">★</span> <span id="tr-pcRating">4.8</span> · <span id="tr-pcSpec">Squash</span></div>
+                    </div>
+                  </div>
+                  <div class="tlabel">Choose a day</div>
+                  <div class="days" id="tr-days"><button class="day on">Today</button><button class="day">Tomorrow</button><button class="day">Fri 18</button></div>
+                  <div class="tlabel">Available times</div>
+                  <div class="tgrid" id="tr-grid">
+                    <button class="ts">07:00</button><button class="ts on">08:00</button><button class="ts">09:00</button>
+                    <button class="ts">17:00</button><button class="ts">18:00</button><button class="ts off">19:00</button>
+                  </div>
+                </div>
+                <div class="actionbar"><button class="btn" id="tr-bookBtn">Book session · £45 <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button></div>
+              </div>
+
+              <!-- 3 · BOOKED -->
+              <div class="scr" id="tr-done" data-s="right">
+                <div class="done">
+                  <div class="ck"><svg width="44" height="44" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></div>
+                  <h3>Session booked.</h3>
+                  <p id="tr-doneSummary">Daniel Whitmore · Today 08:00. See you on court.</p>
+                  <div class="rc" id="tr-doneRcpt">£45 · ADDED TO CALENDAR</div>
+                  <button class="btn" id="tr-againBtn">Book another <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
+                </div>
+              </div>
+            </div>
+            
+            <!-- BOTTOM TAB BAR -->
+            <div class="tr-nav">
+              <span><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg>Home</span>
+              <span class="on"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>Book Now</span>
+              <span><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/></svg>About Us</span>
+              <span><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>Feed</span>
+              <span><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>Profiles</span>
+            </div>
+          </div>
+          <div class="tr-hint"><span class="dot"></span>Live demo — tap a coach to try out</div>
         </div>
       </div>
-
-    </div>
-  </div>
-</div>
-        <div class="tr-hint"><span class="dot"></span>Live demo — tap a coach to try out</div>      </div>
     </div>
   </div>
 </section>
